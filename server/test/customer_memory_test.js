@@ -24,6 +24,20 @@ describe('Customer', function() {
 
         });
 
+        it('should return undefined for non-existing customer', function(done) {
+
+            CustomerMemory.findById(300)
+                
+                .then(function(customer){
+                    expect(customer).to.be.equal(undefined);
+                    done();
+                })
+                .catch(function(err){
+                    done(err);
+                });
+
+        });
+
     });
 
 });
