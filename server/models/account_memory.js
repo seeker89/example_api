@@ -5,6 +5,8 @@ var _ = require("lodash");
 var Account = require("../models/account");
 
 var __store = [];
+var counter = 0;
+var prefix = "0000000000000";
 
 /*
 
@@ -22,6 +24,20 @@ module.exports = {
 
     create: function(data){
 
+        if (this.validateEntry(data)){
+            var entry = {
+                name: data.name,
+                ownerId: data.ownerId,
+                number: (prefix + counter).slice(-prefix.length),
+                amount: 0
+            }
+            __store.push(entry);
+            counter++;
+            return Promise.resolve(new Account(entry));
+        }
+
+        return Promise.reject(new Error("Name field is required for creation of a Account"));
+
     },
 
     findByOwnerId: function(id){
@@ -33,7 +49,7 @@ module.exports = {
     },
 
     validateEntry: function(entry){
-
+        return entry && entry.name && entry.ownerId;
     },
 
 
@@ -52,19 +68,19 @@ module.exports = {
  */
 __store = [
     {
-        "id": 1,
+        "number": "1",
         "ownerId": 2,
         "name": "Current Account",
         "amount": 10.20,
     },
     {
-        "id": 2,
+        "number": "2",
         "ownerId": 2,
         "name": "Savings Account",
         "amount": 10000.78,
     },
     {
-        "id": 3,
+        "number": "3",
         "ownerId": 3,
         "name": "Current Account",
         "amount": -20.99,
