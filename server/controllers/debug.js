@@ -1,11 +1,13 @@
 'use strict';
 
-var url = require('url');
+var logger = require("../libs/logger");
 
-
-var Debug = require('./DebugService');
-
-
-module.exports.stats = function stats (req, res, next) {
-  Debug.stats(req.swagger.params, res, next);
+module.exports.stats = function stats (req, res) {
+    var resp = {
+        startup: req.app.locals.startup,
+        uptime: (new Date()) - req.app.locals.startup,
+        state: "OK"
+    };
+    // logger.debug(resp)
+    res.send(resp);
 };
