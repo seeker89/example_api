@@ -46,6 +46,7 @@ paths:
             $ref: "#/definitions/ResponseError"
   
   /customer/{customerId}:
+    x-swagger-router-controller: customer
     get:
       summary: "Get customer data"
       description: >
@@ -106,6 +107,7 @@ paths:
             $ref: "#/definitions/ResponseError"
 
   /account/{accountId}:
+    x-swagger-router-controller: account
     get:
       summary: "Get account balance"
       description: >
