@@ -17,6 +17,7 @@ paths:
   /customer:
     x-swagger-router-controller: customer
     put:
+      tags: ["customer"]
       summary: "Create a new customer"
       description: >
         Stores a new customer in the database.
@@ -48,6 +49,7 @@ paths:
   /customer/{customerId}:
     x-swagger-router-controller: customer
     get:
+      tags: ["customer"]
       summary: "Get customer data"
       description: >
         Shows customer data by their ID
@@ -78,6 +80,7 @@ paths:
   /account:
     x-swagger-router-controller: account
     put:
+      tags: ["account"]
       summary: "Create a new account for a customer"
       description: >
         Creates a new account for the customer in question.
@@ -109,6 +112,7 @@ paths:
   /account/{accountId}:
     x-swagger-router-controller: account
     get:
+      tags: ["account"]
       summary: "Get account balance"
       description: >
         Shows current balance of an account by its ID
@@ -138,6 +142,7 @@ paths:
   /account/history/{accountId}:
     x-swagger-router-controller: account
     get:
+      tags: ["account", "transaction"]
       summary: "Get account transactions history"
       description: >
         Shows all transactions for the account in question.
@@ -168,6 +173,7 @@ paths:
   /transfer:
     x-swagger-router-controller: account
     put:
+      tags: ["account", "transaction"]
       summary: "Make a new transfer"
       description: >
         Makes a new transfer. It should do some kind of complex validation about
@@ -201,8 +207,9 @@ paths:
   # PING/STATS
   /:
   
-    x-swagger-router-controller: index
+    x-swagger-router-controller: debug
     get:
+      tags: ["debug"]
       description: >
         Useful for debugging - pinging your servers and seeing how long is it, that they've been up.
         Could be used with something like Pingdom, to monitor this endpoint.
@@ -288,16 +295,16 @@ definitions:
         
   Transaction:
     required:
-      - from
-      - to
       - amount
+      - origin
+      - destination
       - executedAt
     properties:
       amount:
         type: number
-      from:
+      origin:
         $ref: '#/definitions/AccountID'
-      to:
+      destination:
         $ref: '#/definitions/AccountID'
       executedAt:
         type: string
