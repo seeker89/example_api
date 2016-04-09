@@ -5,8 +5,6 @@ var _ = require("lodash");
 var Transaction = require("../models/transaction");
 
 var __store = [];
-var counter = 0;
-var prefix = "0000000000000";
 
 /*
 
@@ -24,6 +22,18 @@ module.exports = {
 
     create: function(data){
 
+        if (this.validateEntry(data)){
+            var entry = {
+                origin: data.origin,
+                destination: data.destination,
+                amount: data.amount,
+                executedAt: (new Date()).toISOString()
+            }
+            __store.push(entry);
+            return Promise.resolve(new Transaction(entry));
+        }
+
+        return Promise.reject(new Error("Name field is required for creation of a Transaction"));
     },
 
     findByAccount: function(id){

@@ -19,7 +19,6 @@ describe('Transaction in-memory', function() {
             TransactionMemory.findByOrigin(origin)
                 
                 .then(function(transactions){
-                    console.log(transactions);
                     expect(transactions).to.be.instanceof(Array);
                     expect(transactions.length).to.be.equal(1);
                     var transaction = transactions[0];
