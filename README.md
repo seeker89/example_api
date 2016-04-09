@@ -3,7 +3,7 @@
 
 
 
-## Step one - initial parsing of [the requirements](docs/build_a_bank.md)
+## `Step one` - initial parsing of [the requirements](docs/build_a_bank.md)
 
 PR: [https://github.com/seeker89/example_api/pull/1](https://github.com/seeker89/example_api/pull/1)
 
@@ -38,7 +38,7 @@ Other implicit actions which will __not__ become part of the public API, but wil
 - deletion and updates of customers
 
 
-## Step two - write up an API description in swagger
+## `Step two` - write up an API description in swagger
 
 PR: [https://github.com/seeker89/example_api/pull/2](https://github.com/seeker89/example_api/pull/2)
 
@@ -46,6 +46,6 @@ I'll leave out the employees authentication for now to kick start.
 
 
 
-## Step three - debug the protocol, bootstrap node-based api, serve docs and such
+## `Step three` - debug the protocol, bootstrap node-based api, serve docs and such
 
 PR: [https://github.com/seeker89/example_api/pull/3](https://github.com/seeker89/example_api/pull/3)
