@@ -23,7 +23,7 @@ var logger = require("../libs/logger");
 function Customer(storage) {
 
     if (!storage){
-        throw new Error("Cannot instantiate Customer with no underlying storage");
+        throw new RangeError("Cannot instantiate Customer with no underlying storage");
     }
 
     // save to the database
