@@ -14,7 +14,7 @@ describe('Integration', function() {
             it('should create an customer for a valid user', function(done) {
 
                 var req = {
-                    name: "current"
+                    name: "John Joe"
                 };
 
                 init.then(function(app){
@@ -77,11 +77,6 @@ describe('Integration', function() {
                             ["id", "name"].forEach(function(prop){
                                 expect(res.body).to.have.property(prop);
                             });
-
-                            expect(res.body).to.deep.equal({
-                                "id": "2",
-                                "name": "Michael Li"
-                            });
                         })
                         .end(done)
                 });
@@ -99,6 +94,28 @@ describe('Integration', function() {
                         .get('/customer/' + id)
                         .set('Accept', 'application/json')
                         .expect(404)
+                        .end(done)
+                });
+
+            });
+
+
+            it('should get a customer with two accounts', function(done) {
+
+                var id = "2";
+
+                init.then(function(app){
+
+                    request(app)
+                        .get('/customer/' + id)
+                        .set('Accept', 'application/json')
+                        .expect(200)
+                        .expect(function(res) {
+                            
+                            expect(res.body).to.have.property("accounts");
+                            expect(res.body.accounts).to.be.instanceof(Array);
+                            expect(res.body.accounts.length).to.be.equal(2);
+                        })
                         .end(done)
                 });
 

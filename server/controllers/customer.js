@@ -4,6 +4,7 @@ var logger = require("../libs/logger");
 var handler = require("./errors");
 
 var CustomerManager = require('../models/customer_memory');
+var AccountsManager = require('../models/account_memory');
 
 
 module.exports.createCustomer = function createCustomer (req, res, next) {
@@ -28,7 +29,14 @@ module.exports.getCustomer = function getCustomer (req, res, next) {
         if (!customer){
             handler.notFound(res);
         } else {
-            res.send(customer.toObject());
+            AccountsManager.findByOwnerId(customer.id)
+            .then(function(accounts){
+                var output = customer.toObject();
+                output.accounts = accounts.map(function(elem){
+                    return elem.toObject();
+                })
+                res.send(output);
+            })
         }
     }).catch(function(err){
         handler.send(err);
