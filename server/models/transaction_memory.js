@@ -39,7 +39,7 @@ module.exports = {
     },
 
     validateEntry: function(entry){
-        return entry && entry.name && entry.ownerId;
+        return entry && entry.origin && entry.destination && entry.amount;
     },
 
 
@@ -58,21 +58,21 @@ module.exports = {
  */
 __store = [
     {
-        "number": "1",
-        "ownerId": 2,
-        "name": "Current Account",
-        "amount": 10.20,
+        "origin": "000001",
+        "destination": "000002",
+        "executedAt": (new Date()).toISOString(),
+        "amount": 1000.20,
     },
     {
-        "number": "2",
-        "ownerId": 2,
-        "name": "Savings Account",
-        "amount": 10000.78,
+        "origin": "000002",
+        "destination": "000001",
+        "executedAt": (new Date()).toISOString(),
+        "amount": 2000.20,
     },
     {
-        "number": "3",
-        "ownerId": 3,
-        "name": "Current Account",
-        "amount": -20.99,
+        "origin": "000003",
+        "destination": "000004",
+        "executedAt": (new Date()).toISOString(),
+        "amount": 1.00,
     },
 ];

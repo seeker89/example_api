@@ -14,6 +14,7 @@ describe('Transaction in-memory', function() {
 
             var origin = "000001";
             var destination = "000002";
+            var amount = 1000.20;
 
             TransactionMemory.findByOrigin(origin)
                 
@@ -21,7 +22,7 @@ describe('Transaction in-memory', function() {
                     expect(transactions).to.be.an.array();
                     expect(transactions.length).to.be.equal(1);
                     var transaction = transactions[0];
-                    expect(transaction.amount).to.be.equal(1000);
+                    expect(transaction.amount).to.be.equal(amount);
                     expect(transaction.destination).to.be.equal(destination);
                     done();
                 })
@@ -33,8 +34,9 @@ describe('Transaction in-memory', function() {
 
         it('should find all transactions to account', function(done) {
 
-            var origin = "000001";
-            var destination = "000002";
+            var origin = "000002";
+            var destination = "000001";
+            var amount = 2000.20;
 
             TransactionMemory.findByDestination(destination)
                 
@@ -42,7 +44,7 @@ describe('Transaction in-memory', function() {
                     expect(transactions).to.be.an.array();
                     expect(transactions.length).to.be.equal(1);
                     var transaction = transactions[0];
-                    expect(transaction.amount).to.be.equal(1000);
+                    expect(transaction.amount).to.be.equal(amount);
                     expect(transaction.origin).to.be.equal(origin);
                     done();
                 })
@@ -53,9 +55,11 @@ describe('Transaction in-memory', function() {
         });
 
 
-        it('should find all transactions about account', function(done) {
+        it('should find all transactions about account 000001', function(done) {
 
-            var account = "000002";
+            var account = "000001";
+            var amount1 = 1000.20;
+            var amount2 = 2000.20;
 
             TransactionMemory.findByAccount(account)
                 
@@ -64,11 +68,42 @@ describe('Transaction in-memory', function() {
                     expect(transactions.length).to.be.equal(2);
 
                     var transaction = transactions[0];
-                    expect(transaction.amount).to.be.equal(1000);
+                    expect(transaction.amount).to.be.equal(amount1);
                     expect(transaction.origin).to.be.equal(origin);
 
                     transaction = transactions[1];
-                    expect(transaction.amount).to.be.equal(1000);
+                    expect(transaction.amount).to.be.equal(amount2);
+                    expect(transaction.origin).to.be.equal(origin);
+
+
+                    done();
+                })
+                .catch(function(err){
+                    done(err);
+                });
+
+        });
+
+
+
+        it('should find all transactions about account 000002', function(done) {
+
+            var account = "000002";
+            var amount1 = 1000.20;
+            var amount2 = 2000.20;
+
+            TransactionMemory.findByAccount(account)
+                
+                .then(function(transactions){
+                    expect(transactions).to.be.an.array();
+                    expect(transactions.length).to.be.equal(2);
+
+                    var transaction = transactions[0];
+                    expect(transaction.amount).to.be.equal(amount1);
+                    expect(transaction.origin).to.be.equal(origin);
+
+                    transaction = transactions[1];
+                    expect(transaction.amount).to.be.equal(amount2);
                     expect(transaction.origin).to.be.equal(origin);
 
 
