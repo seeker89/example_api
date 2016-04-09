@@ -41,7 +41,7 @@ function Account(storage) {
 
     // set a number of properties more nicely than through get and set
     var that = this;
-    ["number", "name", "ownerId"].forEach(function(property){
+    ["number", "name", "ownerId", "amount"].forEach(function(property){
         Object.defineProperty(that, property, {
             get: function(){
                 return that.get(property);

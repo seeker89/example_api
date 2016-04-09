@@ -76,7 +76,8 @@ describe('Account', function() {
             var values = {
                 name: "Current Account",
                 number: "curr-12346",
-                ownerId: "1"
+                ownerId: "1",
+                amount: 777.22
             }
 
             var storage = {};
@@ -85,10 +86,12 @@ describe('Account', function() {
             usr.set("name", values.name);
             usr.set("number", values.number);
             usr.set("ownerId", values.ownerId);
+            usr.set("amount", values.amount);
 
             expect(usr.name).to.be.equal(values.name);
             expect(usr.number).to.be.equal(values.number);
             expect(usr.ownerId).to.be.equal(values.ownerId);
+            expect(usr.amount).to.be.equal(values.amount);
 
             expect(usr.doesntexitst).to.be.equal(undefined);
         });
