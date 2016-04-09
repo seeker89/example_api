@@ -16,7 +16,7 @@ describe('Account in-memory', function() {
                 .then(function(account){
                     expect(account.name).to.be.equal("Current Account");
                     expect(account.number).to.be.equal("1");
-                    expect(account.ownerId).to.be.equal(2);
+                    expect(account.ownerId).to.be.equal("2");
                     expect(account.amount).to.be.equal(10.20);
                     done();
                 })
@@ -47,7 +47,7 @@ describe('Account in-memory', function() {
 
         it('should find all accounts of the user', function(done) {
 
-            AccountMemory.findByOwnerId(2)
+            AccountMemory.findByOwnerId("2")
                 
                 .then(function(accounts){
                     expect(accounts.map(function(elem){
@@ -56,13 +56,13 @@ describe('Account in-memory', function() {
                     [
                         {
                             "number": "1",
-                            "ownerId": 2,
+                            "ownerId": "2",
                             "name": "Current Account",
                             "amount": 10.20,
                         },
                         {
                             "number": "2",
-                            "ownerId": 2,
+                            "ownerId": "2",
                             "name": "Savings Account",
                             "amount": 10000.78,
                         }

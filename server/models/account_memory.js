@@ -79,19 +79,19 @@ module.exports = {
 __store = [
     {
         "number": "1",
-        "ownerId": 2,
+        "ownerId": "2",
         "name": "Current Account",
         "amount": 10.20,
     },
     {
         "number": "2",
-        "ownerId": 2,
+        "ownerId": "2",
         "name": "Savings Account",
         "amount": 10000.78,
     },
     {
         "number": "3",
-        "ownerId": 3,
+        "ownerId": "3",
         "name": "Current Account",
         "amount": -20.99,
     },
