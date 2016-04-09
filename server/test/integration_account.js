@@ -177,6 +177,63 @@ describe('Integration', function() {
 
         });
 
+
+
+
+        describe('PUT /transfer', function() {
+
+
+            it('should return 404 for non existing origin account', function(done) {
+
+                var req = {
+                    "amount": 401.78,
+                    "origin": {
+                        "number": "non-existent"
+                    },
+                    "destination": {
+                        "number": "1"
+                    }
+                }
+
+                init.then(function(app){
+
+                    request(app)
+                        .put('/transfer')
+                        .send(req)
+                        .set('Accept', 'application/json')
+                        .expect(404)
+                        .end(done)
+                });
+
+            });
+
+
+            it('should return 404 for non existing origin account', function(done) {
+
+                var req = {
+                    "amount": 401.78,
+                    "origin": {
+                        "number": "1"
+                    },
+                    "destination": {
+                        "number": "non-existent"
+                    }
+                }
+
+                init.then(function(app){
+
+                    request(app)
+                        .put('/transfer')
+                        .send(req)
+                        .set('Accept', 'application/json')
+                        .expect(404)
+                        .end(done)
+                });
+
+            });
+
+        });
+
     });
 
 });
