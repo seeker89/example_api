@@ -25,7 +25,7 @@ module.exports = {
         if (this.validateEntry(data)){
             var entry = {
                 name: data.name,
-                id: (new Date()).getTime()
+                id: (new Date()).getTime().toString()
             }
             __store.push(entry);
             return Promise.resolve(new Customer(entry));
@@ -63,19 +63,19 @@ module.exports = {
  */
 __store = [
     {
-        "id": 1,
+        "id": "1",
         "name": "Jane Woods"
     },
     {
-        "id": 2,
+        "id": "2",
         "name": "Michael Li"
     },
     {
-        "id": 3,
+        "id": "3",
         "name": "Heidi Hasselbach"
     },
     {
-        "id": 4,
+        "id": "4",
         "name": "Rahul Pour"
     }
 ];
