@@ -20,13 +20,11 @@ var Account = require('./AccountService');
 module.exports.createAccount = function createAccount (req, res, next) {
 
     var params = req.swagger.params.body.value;
-    logger.info("account.createAccount", params);
 
     AccountManager.create({
         name: params.name,
         ownerId: params.customer.id
     }).then(function(account){
-        logger.info(account);
         res.send(account.toObject());
     }).catch(function(err){
         sendError(err);

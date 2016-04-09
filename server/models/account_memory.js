@@ -6,7 +6,7 @@ var logger = require("../libs/logger");
 var Account = require("../models/account");
 
 var __store = [];
-var counter = 0;
+var counter = 1;
 var prefix = "0000000000000";
 
 /*
