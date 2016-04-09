@@ -190,6 +190,8 @@ describe('Transaction in-memory', function() {
                 var found = _.find(transactions.map(function(elem){
                     return elem.toObject()
                 }), predicate);
+                expect(found.executedAt).to.not.be.equal(undefined);
+                delete found.executedAt;
                 expect(found).to.be.deep.equal(predicate);
                 done();
             })

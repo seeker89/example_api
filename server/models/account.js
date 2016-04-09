@@ -58,7 +58,7 @@ function Account(storage) {
 
     this.toString = function(){
         var obj = this.toObject();
-        return JSON.stringify(obj. undefined, 2);
+        return JSON.stringify(obj, undefined, 2);
     }
 
 }
