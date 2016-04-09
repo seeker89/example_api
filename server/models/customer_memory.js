@@ -22,6 +22,16 @@ module.exports = {
 
     create: function(data){
 
+        if (this.validateEntry(data)){
+            var entry = {
+                name: data.name,
+                id: (new Date()).getTime()
+            }
+            __store.push(entry);
+            return Promise.resolve(new Customer(entry));
+        }
+
+        return Promise.reject(new Error("Name field is required for creation of a Customer"));
     },
 
     findById: function(id){
@@ -31,6 +41,10 @@ module.exports = {
             result = new Customer(found);
         }
         return Promise.resolve(result);
+    },
+
+    validateEntry: function(entry){
+        return entry && entry.name;
     },
 
 
