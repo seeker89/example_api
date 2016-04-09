@@ -95,4 +95,19 @@ __store = [
         "name": "Current Account",
         "amount": -20.99,
     },
+
+    {
+        "number": "transfer_from",
+        "ownerId": "3",
+        "name": "transfer_from - name",
+        "amount": 1000,
+    },
+
+
+    {
+        "number": "transfer_to",
+        "ownerId": "3",
+        "name": "transfer_to - name",
+        "amount": -10.50,
+    },
 ];

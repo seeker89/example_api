@@ -232,6 +232,50 @@ describe('Integration', function() {
 
             });
 
+
+
+            it('should do a transaction properly', function(done) {
+
+                var req = {
+                    "amount": 400,
+                    "origin": {
+                        "number": "transfer_from"
+                    },
+                    "destination": {
+                        "number": "transfer_to"
+                    }
+                }
+
+                init.then(function(app){
+
+                    request(app)
+                        .put('/transfer')
+                        .send(req)
+                        .set('Accept', 'application/json')
+                        .expect(200)
+                        .end(function(err, res){
+
+                            request(app)
+                                .get('/account/' + req.origin.number)
+                                .set('Accept', 'application/json')
+                                .expect(200)
+                                .end(function(err, res) {
+                                    expect(res.body.amount).to.be.equal(600);
+
+                                    request(app)
+                                        .get('/account/' + req.destination.number)
+                                        .set('Accept', 'application/json')
+                                        .expect(200)
+                                        .expect(function(res) {
+                                            expect(res.body.amount).to.be.equal(400 - 10.5);
+                                        })
+                                        .end(done)
+                                })
+                        })
+                });
+
+            });
+
         });
 
     });
