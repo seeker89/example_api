@@ -1,4 +1,5 @@
 var Promise = require("bluebird");
+var _ = require("lodash");
 
 var logger = require("../libs/logger");
 
@@ -53,7 +54,9 @@ function Transaction(storage) {
     });
 
     this.toObject = function(){
-        return storage
+        var data = _.clone(storage);
+        delete data.save;
+        return data;
     };
 
     this.toString = function(){
