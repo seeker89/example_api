@@ -1,0 +1,35 @@
+{
+  "name": "example-bank-backend-api",
+  "version": "0.0.1",
+  "description": "Backend API for a bank.",
+  "main": "index.js",
+  "keywords": [
+    "swagger"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bluebird": "^2.9.34",
+    "body-parser": "^1.13.3",
+    "cookie-parser": "~1.3.5",
+    "debug": "^2.2.0",
+    "express": "^4.12.3",
+    "js-yaml": "^3.4.2",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "morgan": "^1.6.1",
+    "swagger-express-mw": "0.0.x",
+    "swagger-tools": "^0.9.5",
+    "swagger-ui": "^2.1.2",
+    "tedious": "^1.13.2",
+    "unirest": "^0.4.2",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "should": "^5.2.0",
+    "supertest": "^0.15.0",
+    "chai": "^3.2.0",
+    "mocha": "^2.3.0",
+    "sinon": "^1.16.1"
+  }
+}
