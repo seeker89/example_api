@@ -90,6 +90,25 @@ describe('Customer', function() {
             expect(usr.doesntexitst).to.be.equal(undefined);
         });
 
+        it('should work like a charm with setters too', function() {
+
+            var values = {
+                name: "Donald",
+                id: "12346"
+            }
+
+            var storage = {};
+
+            var usr = new Customer(storage);
+            usr.name = values.name;
+            usr.id = values.id;
+
+            expect(usr.name).to.be.equal(values.name);
+            expect(usr.id).to.be.equal(values.id);
+
+            expect(usr.doesntexitst).to.be.equal(undefined);
+        });
+
     });
 
    describe('#toObject', function() {

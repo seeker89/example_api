@@ -98,6 +98,31 @@ describe('Transaction', function() {
             expect(usr.doesntexitst).to.be.equal(undefined);
         });
 
+        it('should work like a charm with setters too', function() {
+
+            var values = {
+                origin: "Current Transaction",
+                destination: "curr-12346",
+                executedAt: (new Date()).toISOString(),
+                amount: 777.22
+            }
+
+            var storage = {};
+
+            var usr = new Transaction(storage);
+            usr.origin = values.origin;
+            usr.destination = values.destination;
+            usr.executedAt = values.executedAt;
+            usr.amount = values.amount;
+
+            expect(usr.origin).to.be.equal(values.origin);
+            expect(usr.destination).to.be.equal(values.destination);
+            expect(usr.executedAt).to.be.equal(values.executedAt);
+            expect(usr.amount).to.be.equal(values.amount);
+
+            expect(usr.doesntexitst).to.be.equal(undefined);
+        });
+
     });
 
    describe('#toObject', function() {
