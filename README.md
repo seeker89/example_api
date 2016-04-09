@@ -15,9 +15,9 @@ Ok, so this is kind of what we're looking at
 The entities we'll need to implement that:
 
 - [ ] employee (the one with the power to do things)
-- [ ] customer
-- [ ] account
-- [ ] transaction
+- [x] customer
+- [x] account
+- [x] transaction
 
 The actions that are explicit in the requirements (the numbers from above):
 
