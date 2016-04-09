@@ -1,6 +1,4 @@
 var Promise = require("bluebird");
-var Moment = require("moment");
-var _ = require("lodash");
 
 var logger = require("../libs/logger");
 
