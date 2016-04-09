@@ -79,6 +79,15 @@ Cool, so now that we have all the bricks tested, let's write some integration te
 PR: [https://github.com/seeker89/example_api/pull/7](https://github.com/seeker89/example_api/pull/7)
 
 
+## `Step #8` - aiming for full code coverage.
+
+The test coverage report can be found [here](https://github.com/seeker89/example_api/blob/master/coverage/lcov-report/index.html)
+
+You can also generate it with `make coverage` if you have `istanbul` installed (`npm install -g instanbul`).
+
+
+It looks like this ![docs/coverage.png](docs/coverage.png)
+
 # Finished product
 
 ```sh
