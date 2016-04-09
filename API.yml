@@ -134,10 +134,39 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ResponseError"
+            
+  /account/history/{accountId}:
+    x-swagger-router-controller: account
+    get:
+      summary: "Get account transactions history"
+      description: >
+        Shows all transactions for the account in question.
+      operationId: get
+      parameters:
+        - in: path
+          name: accountId
+          type: string
+          description: The account id
+          required: true
+      security:
+        - api_key: []
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/TransactionArray"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ResponseError"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ResponseError"
 
 
   /transfer:
-    x-swagger-router-controller: transfer
+    x-swagger-router-controller: account
     put:
       summary: "Make a new transfer"
       description: >
@@ -276,6 +305,15 @@ definitions:
       executedAt:
         type: string
         format: date-time
+        
+  TransactionArray:
+    required:
+      - transactions
+    properties:
+      transactions:
+        type: array
+        items:
+          $ref: "#/definitions/Transaction"
         
   CreateTransferRequest:
     required:
