@@ -41,7 +41,10 @@ module.exports = {
     },
 
     findByOwnerId: function(id){
-
+        var found = _.filter(__store, {"ownerId": id});
+        return Promise.resolve(found.map(function(elem){
+            return new Account(elem);
+        }));
     },
 
     findByNumber: function(id){

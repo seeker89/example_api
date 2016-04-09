@@ -81,7 +81,7 @@ describe('Account in-memory', function() {
             AccountMemory.findByOwnerId("300")
                 
                 .then(function(accounts){
-                    expect(accounts).to.be.equal([]);
+                    expect(accounts).to.be.deep.equal([]);
                     done();
                 })
                 .catch(function(err){
