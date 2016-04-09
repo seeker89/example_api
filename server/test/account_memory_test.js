@@ -9,7 +9,7 @@ describe('Account in-memory', function() {
 
     describe('#find', function() {
 
-        it('should find one of the predefined accounts', function(done) {
+        it('should find one of the predefined accounts by number', function(done) {
 
             AccountMemory.findByNumber("1")
                 
