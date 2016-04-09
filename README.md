@@ -5,7 +5,7 @@
 
 ## Step one - initial parsing of [the requirements](docs/build_a_bank.md)
 
-[https://github.com/seeker89/example_api/pull/1](https://github.com/seeker89/example_api/pull/1)
+PR: [https://github.com/seeker89/example_api/pull/1](https://github.com/seeker89/example_api/pull/1)
 
 Ok, so this is kind of what we're looking at
 
@@ -38,3 +38,8 @@ Other implicit actions which will __not__ become part of the public API, but wil
 - deletion and updates of customers
 
 
+## Step two - write up an API description in swagger
+
+PR: [https://github.com/seeker89/example_api/pull/2](https://github.com/seeker89/example_api/pull/2)
+
+I'll leave out the employees authentication for now to kick start.
