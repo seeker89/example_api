@@ -40,4 +40,49 @@ describe('Customer', function() {
 
     });
 
+
+    describe('#create', function() {
+
+        it('should create and return a new user with random id', function(done) {
+
+            var Name = "Donald Tr Ump";
+
+            CustomerMemory.create({
+                "name": Name
+            }).then(function(customer){
+                expect(customer.name).to.be.equal(Name);
+                expect(customer.id).to.not.be.equal(undefined);
+                done();
+            })
+            .catch(function(err){
+                done(err);
+            });
+
+        });
+
+        it('should create and then find a new user', function(done) {
+
+            var Name = "Somebody else";
+            var id;
+
+            CustomerMemory.create({
+                "name": Name
+            }).then(function(customer){
+                expect(customer.name).to.be.equal(Name);
+                expect(customer.id).to.not.be.equal(undefined);
+                id = customer.id;
+                return CustomerMemory.findById(id)
+            }).then(function(customer){
+                expect(customer.name).to.be.equal(Name);
+                expect(customer.id).to.be.equal(id);
+                done();
+            })
+            .catch(function(err){
+                done(err);
+            });
+
+        });
+
+    });
+
 });
