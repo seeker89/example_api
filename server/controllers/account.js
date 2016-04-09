@@ -16,7 +16,7 @@ var TransactionsManager = require('../models/transaction_memory');
     - create intial transaction
 
  */
-module.exports.createAccount = function createAccount (req, res, next) {
+module.exports.createAccount = function createAccount(req, res, next) {
 
     var params = req.swagger.params.body.value;
 
@@ -37,7 +37,7 @@ module.exports.createAccount = function createAccount (req, res, next) {
     });
 };
 
-module.exports.getAccount = function getAccount (req, res, next) {
+module.exports.getAccount = function getAccount(req, res, next) {
     
     var id = req.swagger.params.accountId.value;
     
@@ -53,10 +53,10 @@ module.exports.getAccount = function getAccount (req, res, next) {
     });
 };
 
-module.exports.createTransfer = function createTransfer (req, res, next) {
+module.exports.createTransfer = function createTransfer(req, res, next) {
   Account.createTransfer(req.swagger.params, res, next);
 };
 
-module.exports.getAccountHistory = function getAccountHistory (req, res, next) {
+module.exports.getAccountHistory = function getAccountHistory(req, res, next) {
   Account.getAccountHistory(req.swagger.params, res, next);
 };
