@@ -8,7 +8,12 @@ var __store;
 
 /*
 
-    This is a
+    This is an in-memory store for the API.
+
+    It's designed to mimic the behaviour of a database-backed,
+    asynchronous API.
+
+    We'll use it for testing.
 
 
  */
