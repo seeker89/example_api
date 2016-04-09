@@ -7,7 +7,7 @@ var AccountMemory = require("../models/account_memory");
 
 describe('Account in-memory', function() {
 
-    describe('#find', function() {
+    describe('#findByNumber', function() {
 
         it('should find one of the predefined accounts by number', function(done) {
 
@@ -43,7 +43,7 @@ describe('Account in-memory', function() {
     });
 
 
-    describe('#find', function() {
+    describe('#findByOwnerId', function() {
 
         it('should find all accounts of the user', function(done) {
 
