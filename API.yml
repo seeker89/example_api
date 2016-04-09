@@ -272,6 +272,10 @@ definitions:
         type: string
       amount:
         type: number
+      ownerId:
+        type: string
+      name:
+        type: string
         
   AccountID:
     required:
