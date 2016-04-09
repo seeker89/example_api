@@ -97,7 +97,7 @@ describe('Customer', function() {
         it('should work like a charm', function() {
             var storage = {};
             var usr = new Customer(storage);
-            expect(usr.toObject()).to.be.equal(storage);
+            expect(usr.toObject()).to.be.deep.eql(storage);
         });
 
     });
