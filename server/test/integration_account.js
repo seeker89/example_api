@@ -14,6 +14,34 @@ describe('Integration', function() {
             it('should create an account for a valid user', function(done) {
 
                 var req = {
+                    amount: 0,
+                    name: "current",
+                    customer: {
+                        id: "1"
+                    }
+                };
+
+                init.then(function(app){
+
+                    request(app)
+                        .put('/account')
+                        .set('Accept', 'application/json')
+                        .send(req)
+                        .expect(200)
+                        .expect(function(res) {
+                            ["name", "ownerId", "number", "amount"].forEach(function(prop){
+                                expect(res.body).to.have.property(prop);
+                            });
+                            expect(res.body.amount).to.be.equal(0);
+                        })
+                        .end(done)
+                });
+
+            });
+
+            it('should create an account with a right balance', function(done) {
+
+                var req = {
                     amount: 1001.00,
                     name: "current",
                     customer: {
@@ -32,6 +60,8 @@ describe('Integration', function() {
                             ["name", "ownerId", "number", "amount"].forEach(function(prop){
                                 expect(res.body).to.have.property(prop);
                             });
+
+                            expect(res.body.amount).to.be.equal(1001.00);
                         })
                         .end(done)
                 });

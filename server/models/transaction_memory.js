@@ -61,7 +61,7 @@ module.exports = {
     },
 
     validateEntry: function(entry){
-        return entry && entry.origin && entry.destination && entry.amount;
+        return entry && entry.origin && entry.destination && (entry.amount || entry.amount === 0);
     },
 
 
