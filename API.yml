@@ -141,7 +141,7 @@ paths:
       summary: "Get account transactions history"
       description: >
         Shows all transactions for the account in question.
-      operationId: get
+      operationId: getAccountHistory
       parameters:
         - in: path
           name: accountId
@@ -206,10 +206,7 @@ paths:
       description: >
         Useful for debugging - pinging your servers and seeing how long is it, that they've been up.
         Could be used with something like Pingdom, to monitor this endpoint.
-      tags: ["_server"]
       summary: Check the API state
-      description: >
-        Ping the server to verify it responds correctly
       operationId: stats
       responses:
         "200":
