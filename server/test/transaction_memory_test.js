@@ -19,7 +19,8 @@ describe('Transaction in-memory', function() {
             TransactionMemory.findByOrigin(origin)
                 
                 .then(function(transactions){
-                    expect(transactions).to.be.an.array();
+                    console.log(transactions);
+                    expect(transactions).to.be.instanceof(Array);
                     expect(transactions.length).to.be.equal(1);
                     var transaction = transactions[0];
                     expect(transaction.amount).to.be.equal(amount);
@@ -41,7 +42,7 @@ describe('Transaction in-memory', function() {
             TransactionMemory.findByDestination(destination)
                 
                 .then(function(transactions){
-                    expect(transactions).to.be.an.array();
+                    expect(transactions).to.be.instanceof(Array);
                     expect(transactions.length).to.be.equal(1);
                     var transaction = transactions[0];
                     expect(transaction.amount).to.be.equal(amount);
@@ -64,7 +65,7 @@ describe('Transaction in-memory', function() {
             TransactionMemory.findByAccount(account)
                 
                 .then(function(transactions){
-                    expect(transactions).to.be.an.array();
+                    expect(transactions).to.be.instanceof(Array);
                     expect(transactions.length).to.be.equal(2);
 
                     var transaction = transactions[0];
@@ -95,7 +96,7 @@ describe('Transaction in-memory', function() {
             TransactionMemory.findByAccount(account)
                 
                 .then(function(transactions){
-                    expect(transactions).to.be.an.array();
+                    expect(transactions).to.be.instanceof(Array);
                     expect(transactions.length).to.be.equal(2);
 
                     var transaction = transactions[0];

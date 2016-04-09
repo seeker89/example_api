@@ -2,7 +2,7 @@ var Promise = require("bluebird");
 var Moment = require("moment");
 var _ = require("lodash");
 
-var Account = require("../models/account");
+var Transaction = require("../models/transaction");
 
 var __store = [];
 var counter = 0;
@@ -27,15 +27,26 @@ module.exports = {
     },
 
     findByAccount: function(id){
-
+        var found = _.filter(__store, function(elem){
+            return elem.origin === id || elem.destination === id
+        });
+        return Promise.resolve(found.map(function(elem){
+            return new Transaction(elem);
+        }));
     },
 
     findByOrigin: function(id){
-
+        var found = _.filter(__store, {"origin": id});
+        return Promise.resolve(found.map(function(elem){
+            return new Transaction(elem);
+        }));
     },
 
     findByDestination: function(id){
-
+        var found = _.filter(__store, {"destination": id});
+        return Promise.resolve(found.map(function(elem){
+            return new Transaction(elem);
+        }));
     },
 
     validateEntry: function(entry){
