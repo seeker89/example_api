@@ -42,4 +42,34 @@ describe('Customer', function() {
 
     });
 
+
+    describe('#save', function() {
+
+        it('should save things', function(done) {
+
+            var usr;
+
+            var storage = {};
+            storage.save = function() {
+                return Promise.resolve(usr);
+            };
+
+            usr = new Customer(storage);
+
+            usr.save()
+                .then(function(u){
+                    assert(u === usr)
+                    done();
+                })
+                .catch(function(err){
+                    done(err);
+                });
+        });
+
+    });
+
+
+
+
+
 });
