@@ -105,6 +105,34 @@ paths:
           schema:
             $ref: "#/definitions/ResponseError"
 
+  /account/{accountId}:
+    get:
+      summary: "Get account balance"
+      description: >
+        Shows current balance of an account by its ID
+      operationId: getAccount
+      parameters:
+        - in: path
+          name: accountId
+          type: string
+          description: The account id
+          required: true
+      security:
+        - api_key: []
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Account"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ResponseError"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ResponseError"
+
 
   /transfer:
     x-swagger-router-controller: transfer
@@ -203,6 +231,7 @@ definitions:
   Account:
     required:
       - number
+      - amount
     properties:
       number:
         type: string
