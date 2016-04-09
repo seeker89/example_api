@@ -11,6 +11,7 @@ var TransactionsManager = require('../models/transaction_memory');
 module.exports.createAccount = function createAccount(req, res, next) {
 
     var params = req.swagger.params.body.value;
+    var newAccount;
 
     CustomerManager
     .findById(params.customer.id)
@@ -23,7 +24,17 @@ module.exports.createAccount = function createAccount(req, res, next) {
         }
         ErrorHandler.throwNotFound("Customer not found");
     }).then(function(account){
-        res.send(account.toObject());
+        newAccount = account;
+        newAccount.amount += params.amount;
+        return newAccount.save();
+    }).then(function(){
+        return TransactionsManager.create({
+            origin: "paid-in-cash",
+            destination: newAccount.number,
+            amount: params.amount
+        });
+    }).then(function(transaction){
+        res.send(newAccount.toObject());
     }).catch(function(err){
         ErrorHandler.sendError(res, err);
     });
