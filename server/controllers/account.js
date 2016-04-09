@@ -5,6 +5,7 @@ var ErrorHandler = require("./errors");
 
 var AccountManager = require('../models/account_memory');
 var CustomerManager = require('../models/customer_memory');
+var TransactionsManager = require('../models/transaction_memory');
 
 /*
 
@@ -30,7 +31,6 @@ module.exports.createAccount = function createAccount (req, res, next) {
         }
         ErrorHandler.throwNotFound("Customer not found");
     }).then(function(account){
-        console.log(account)
         res.send(account.toObject());
     }).catch(function(err){
         ErrorHandler.sendError(res, err);
