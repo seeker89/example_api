@@ -28,6 +28,7 @@ module.exports = {
                 id: (new Date()).getTime().toString()
             }
             __store.push(entry);
+            entry.save = Promise.resolve(entry);
             return Promise.resolve(new Customer(entry));
         }
 

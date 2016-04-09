@@ -30,6 +30,7 @@ module.exports = {
                 executedAt: (new Date()).toISOString()
             }
             __store.push(entry);
+            entry.save = Promise.resolve(entry);
             return Promise.resolve(new Transaction(entry));
         }
 
