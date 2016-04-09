@@ -69,6 +69,30 @@ describe('Customer', function() {
     });
 
 
+    describe('#dot notation', function() {
+
+        it('should work like a charm', function() {
+
+            var values = {
+                name: "Donald",
+                id: "12346"
+            }
+
+            var storage = {};
+
+            var usr = new Customer(storage);
+            usr.set("name", values.name);
+            usr.set("id", values.id);
+
+            expect(usr.name).to.be.equal(values.name);
+            expect(usr.id).to.be.equal(values.id);
+
+            expect(usr.doesntexitst).to.be.equal(undefined);
+        });
+
+    });
+
+
 
 
 

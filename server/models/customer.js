@@ -41,6 +41,19 @@ function Customer(storage) {
         return storage[prop];
     };
 
+    // set a number of properties more nicely than through get and set
+    var that = this;
+    ["name", "id"].forEach(function(property){
+        Object.defineProperty(that, property, {
+            get: function(){
+                return that.get(property);
+            },
+            set: function(value){
+                that.set(property, value)
+            }
+        });
+    });
+
 }
 
 
