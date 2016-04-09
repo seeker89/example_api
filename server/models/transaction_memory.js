@@ -3,6 +3,7 @@ var Moment = require("moment");
 var _ = require("lodash");
 
 var Transaction = require("../models/transaction");
+var wrap = require("../libs/mem_wrapper");
 
 var __store = [];
 
@@ -30,8 +31,7 @@ module.exports = {
                 executedAt: (new Date()).toISOString()
             }
             __store.push(entry);
-            entry.save = Promise.resolve(entry);
-            return Promise.resolve(new Transaction(entry));
+            return Promise.resolve(new Transaction(wrap(entry)));
         }
 
         return Promise.reject(new Error("Name field is required for creation of a Transaction"));
@@ -42,21 +42,21 @@ module.exports = {
             return elem.origin === id || elem.destination === id
         });
         return Promise.resolve(found.map(function(elem){
-            return new Transaction(elem);
+            return new Transaction(wrap(elem));
         }));
     },
 
     findByOrigin: function(id){
         var found = _.filter(__store, {"origin": id});
         return Promise.resolve(found.map(function(elem){
-            return new Transaction(elem);
+            return new Transaction(wrap(elem));
         }));
     },
 
     findByDestination: function(id){
         var found = _.filter(__store, {"destination": id});
         return Promise.resolve(found.map(function(elem){
-            return new Transaction(elem);
+            return new Transaction(wrap(elem));
         }));
     },
 

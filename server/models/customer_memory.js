@@ -3,6 +3,7 @@ var Moment = require("moment");
 var _ = require("lodash");
 
 var Customer = require("../models/customer");
+var wrap = require("../libs/mem_wrapper");
 
 var __store;
 
@@ -28,8 +29,7 @@ module.exports = {
                 id: (new Date()).getTime().toString()
             }
             __store.push(entry);
-            entry.save = Promise.resolve(entry);
-            return Promise.resolve(new Customer(entry));
+            return Promise.resolve(new Customer(wrap(entry)));
         }
 
         return Promise.reject(new Error("Name field is required for creation of a Customer"));
@@ -39,7 +39,7 @@ module.exports = {
         var result;
         var found = _.find(__store, {"id": id});
         if (found){
-            result = new Customer(found);
+            result = new Customer(wrap(found));
         }
         return Promise.resolve(result);
     },

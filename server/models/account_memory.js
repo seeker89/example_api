@@ -4,6 +4,7 @@ var _ = require("lodash");
 
 var logger = require("../libs/logger");
 var Account = require("../models/account");
+var wrap = require("../libs/mem_wrapper");
 
 var __store = [];
 var counter = 1;
@@ -34,8 +35,7 @@ module.exports = {
             }
             __store.push(entry);
             counter++;
-            entry.save = Promise.resolve(entry);
-            return Promise.resolve(new Account(entry));
+            return Promise.resolve(new Account(wrap(entry)));
         }
 
         return Promise.reject(new Error("Name and ownerId fields are required for creation of a Account"));
@@ -45,7 +45,7 @@ module.exports = {
     findByOwnerId: function(id){
         var found = _.filter(__store, {"ownerId": id});
         return Promise.resolve(found.map(function(elem){
-            return new Account(elem);
+            return new Account(wrap(elem));
         }));
     },
 
@@ -53,7 +53,7 @@ module.exports = {
         var result;
         var found = _.find(__store, {"number": id});
         if (found){
-            result = new Account(found);
+            result = new Account(wrap(found));
         }
         return Promise.resolve(result);
     },
