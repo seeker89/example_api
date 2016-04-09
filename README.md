@@ -43,3 +43,9 @@ Other implicit actions which will __not__ become part of the public API, but wil
 PR: [https://github.com/seeker89/example_api/pull/2](https://github.com/seeker89/example_api/pull/2)
 
 I'll leave out the employees authentication for now to kick start.
+
+
+
+## Step three - debug the protocol, bootstrap node-based api, serve docs and such
+
+PR: [https://github.com/seeker89/example_api/pull/3](https://github.com/seeker89/example_api/pull/3)
