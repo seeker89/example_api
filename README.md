@@ -3,7 +3,7 @@
 
 
 
-## `Step one` - initial parsing of [the requirements](docs/build_a_bank.md)
+## `Step #1` - initial parsing of [the requirements](docs/build_a_bank.md)
 
 PR: [https://github.com/seeker89/example_api/pull/1](https://github.com/seeker89/example_api/pull/1)
 
@@ -38,7 +38,7 @@ Other implicit actions which will __not__ become part of the public API, but wil
 - deletion and updates of customers
 
 
-## `Step two` - write up an API description in swagger
+## `Step #2` - write up an API description in swagger
 
 PR: [https://github.com/seeker89/example_api/pull/2](https://github.com/seeker89/example_api/pull/2)
 
@@ -46,23 +46,23 @@ I'll leave out the employees authentication for now to kick start.
 
 
 
-## `Step three` - bootstrap node-based api, serve docs and such
+## `Step #3` - bootstrap node-based api, serve docs and such
 
 PR: [https://github.com/seeker89/example_api/pull/3](https://github.com/seeker89/example_api/pull/3)
 
 
 
-## `Step four` - TDD Customer model + in-memory backend
+## `Step #4` - TDD Customer model + in-memory backend
 
 PR: [https://github.com/seeker89/example_api/pull/4](https://github.com/seeker89/example_api/pull/4)
 
 
-## `Step five` - TDD Account model + in-memory backend
+## `Step #5` - TDD Account model + in-memory backend
 
 PR: [https://github.com/seeker89/example_api/pull/5](https://github.com/seeker89/example_api/pull/5)
 
 
-## `Step six` - TDD Transaction model + in-memory backend
+## `Step #6` - TDD Transaction model + in-memory backend
 
 PR: [https://github.com/seeker89/example_api/pull/6](https://github.com/seeker89/example_api/pull/6)
 
