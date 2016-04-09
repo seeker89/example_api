@@ -7,15 +7,7 @@ var AccountManager = require('../models/account_memory');
 var CustomerManager = require('../models/customer_memory');
 var TransactionsManager = require('../models/transaction_memory');
 
-/*
 
-    Creates a new account for a particular user.
-
-    - verify user exists,
-    - create the account
-    - create intial transaction
-
- */
 module.exports.createAccount = function createAccount(req, res, next) {
 
     var params = req.swagger.params.body.value;
@@ -53,8 +45,52 @@ module.exports.getAccount = function getAccount(req, res, next) {
     });
 };
 
+/*
+
+    In the real world we would like to wrap this into a transaction.
+
+ */
+
 module.exports.createTransfer = function createTransfer(req, res, next) {
-  Account.createTransfer(req.swagger.params, res, next);
+
+    var params = req.swagger.params.body.value;
+
+    var accountOrigin, accountDestination;
+    var transaction;
+
+    AccountManager
+    .findByNumber(params.origin.number)
+    .then(function(account){
+        if (account){
+            accountOrigin = account;
+            return AccountManager.findByNumber(params.destination.number);
+        }
+        ErrorHandler.throwNotFound("Origin account not found");
+    }).then(function(account){
+        if (account){
+            accountDestination = account;
+            return TransactionsManager.create({
+                origin: accountOrigin.number,
+                destination: accountDestination.number,
+                amount: params.amount
+            });
+        }
+        ErrorHandler.throwNotFound("Destination account not found");
+    }).then(function(trans){
+        console.log(trans);
+        transaction = trans;
+        accountOrigin.amount -= params.amount;
+        return accountOrigin.save();
+    }).then(function(){
+        accountDestination.amount += params.amount;
+        return accountDestination.save();
+    }).then(function(){
+        res.send(transaction.toObject());
+    }).catch(function(err){
+        ErrorHandler.sendError(res, err);
+    });
+
+
 };
 
 module.exports.getAccountHistory = function getAccountHistory(req, res, next) {
