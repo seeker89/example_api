@@ -267,6 +267,7 @@ definitions:
     required:
       - number
       - amount
+      - name
     properties:
       number:
         type: string
@@ -291,11 +292,14 @@ definitions:
     required:
       - amount
       - customer
+      - name
     properties:
       amount:
         type: number
       customer:
         $ref: '#/definitions/CustomerID'
+      name:
+        type: string
         
   Transaction:
     required:
