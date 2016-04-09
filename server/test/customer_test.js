@@ -92,6 +92,16 @@ describe('Customer', function() {
 
     });
 
+   describe('#toObject', function() {
+
+        it('should work like a charm', function() {
+            var storage = {};
+            var usr = new Customer(storage);
+            expect(usr.toObject()).to.be.equal(storage);
+        });
+
+    });
+
 
 
 
