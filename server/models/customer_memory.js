@@ -25,7 +25,12 @@ module.exports = {
     },
 
     findById: function(id){
-
+        var result;
+        var found = _.find(__store, {"id": id});
+        if (found){
+            result = new Customer(found);
+        }
+        return Promise.resolve(result);
     },
 
 
@@ -42,7 +47,7 @@ module.exports = {
     Prefilling the store with some data to begin with
 
  */
-store = [
+__store = [
     {
         "id": 1,
         "name": "Jane Woods"
