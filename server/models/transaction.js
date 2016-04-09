@@ -4,7 +4,7 @@ var logger = require("../libs/logger");
 
 /*
 
-    The Account model.
+    The Transaction model.
 
     Since we're going to have at least two swappable backends (in-memory + db),
     this model will abstract the user manipulations by wrapping the actual data
@@ -18,10 +18,10 @@ var logger = require("../libs/logger");
 
 
  */
-function Account(storage) {
+function Transaction(storage) {
 
     if (!storage){
-        throw new RangeError("Cannot instantiate Account with no underlying storage");
+        throw new RangeError("Cannot instantiate Transaction with no underlying storage");
     }
 
     // save to the database
@@ -41,7 +41,7 @@ function Account(storage) {
 
     // set a number of properties more nicely than through get and set
     var that = this;
-    ["number", "name", "ownerId", "amount"].forEach(function(property){
+    ["origin", "destination", "amount", "executedAt"].forEach(function(property){
         Object.defineProperty(that, property, {
             get: function(){
                 return that.get(property);
@@ -64,4 +64,4 @@ function Account(storage) {
 }
 
 
-module.exports = Account;
+module.exports = Transaction;
