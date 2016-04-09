@@ -1,0 +1,366 @@
+swagger: "2.0"
+info:
+  version: "2.0"
+  title: Example Bank Backend API
+  description: >
+    Backend API for a bank.
+basePath: /
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+
+  /customer:
+    x-swagger-router-controller: customer
+    put:
+      summary: "Create a new customer"
+      description: >
+        Stores a new customer in the database.
+        Will generate a random id, unless provided with one.
+      operationId: createCustomer
+      parameters:
+        - in: body
+          name: body
+          description: The customer data to store
+          required: true
+          schema:
+            $ref: '#/definitions/CreateCustomerRequest'
+      security:
+        - api_key: []
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Customer"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ResponseError"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ResponseError"
+  
+  /customer/{customerId}:
+    x-swagger-router-controller: customer
+    get:
+      summary: "Get customer data"
+      description: >
+        Shows customer data by their ID
+      operationId: getCustomer
+      parameters:
+        - in: path
+          name: customerId
+          type: string
+          description: The customer id
+          required: true
+      security:
+        - api_key: []
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Customer"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ResponseError"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ResponseError"
+            
+            
+  /account:
+    x-swagger-router-controller: account
+    put:
+      summary: "Create a new account for a customer"
+      description: >
+        Creates a new account for the customer in question.
+        Creates a transaction with the amount specified.
+      operationId: createAccount
+      parameters:
+        - in: body
+          name: body
+          description: The customer data to store
+          required: true
+          schema:
+            $ref: '#/definitions/CreateAccountRequest'
+      security:
+        - api_key: []
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Customer"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ResponseError"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ResponseError"
+
+  /account/{accountId}:
+    x-swagger-router-controller: account
+    get:
+      summary: "Get account balance"
+      description: >
+        Shows current balance of an account by its ID
+      operationId: getAccount
+      parameters:
+        - in: path
+          name: accountId
+          type: string
+          description: The account id
+          required: true
+      security:
+        - api_key: []
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Account"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ResponseError"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ResponseError"
+            
+  /account/history/{accountId}:
+    x-swagger-router-controller: account
+    get:
+      summary: "Get account transactions history"
+      description: >
+        Shows all transactions for the account in question.
+      operationId: get
+      parameters:
+        - in: path
+          name: accountId
+          type: string
+          description: The account id
+          required: true
+      security:
+        - api_key: []
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/TransactionArray"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ResponseError"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ResponseError"
+
+
+  /transfer:
+    x-swagger-router-controller: account
+    put:
+      summary: "Make a new transfer"
+      description: >
+        Makes a new transfer. It should do some kind of complex validation about
+        whether the originating account has enough money on it, can do overdraft, credit, etc.
+      operationId: createTransfer
+      parameters:
+        - in: body
+          name: body
+          description: The accounts to make the transfer between
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTransferRequest'
+      security:
+        - api_key: []
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Transaction"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ResponseError"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ResponseError"
+
+
+
+  # PING/STATS
+  /:
+  
+    x-swagger-router-controller: index
+    get:
+      description: >
+        Useful for debugging - pinging your servers and seeing how long is it, that they've been up.
+        Could be used with something like Pingdom, to monitor this endpoint.
+      tags: ["_server"]
+      summary: Check the API state
+      description: >
+        Ping the server to verify it responds correctly
+      operationId: stats
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Stats"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ResponseError"
+
+
+
+# SCHEMA DEFINITIONS
+definitions:
+
+  Customer:
+    required:
+      - name
+    properties:
+      created:
+        description: can't be overwritten
+        type: string
+        format: date-time
+      name:
+        type: string
+      id:
+        type: string
+      accounts:
+        type: array
+        items:
+          $ref: "#/definitions/Account"
+        
+  CustomerID:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        
+  CreateCustomerRequest:
+    required:
+      - name
+    properties:
+      name:
+        type: string
+      id:
+        type: string
+        
+  Account:
+    required:
+      - number
+      - amount
+    properties:
+      number:
+        type: string
+      amount:
+        type: number
+        
+  AccountID:
+    required:
+      - number
+    properties:
+      number:
+        type: string
+        
+  CreateAccountRequest:
+    description: >
+      Both the amount and customer are required.
+      If you need to create a new account with no amount on it, just set the amount to 0.
+    required:
+      - amount
+      - customer
+    properties:
+      amount:
+        type: number
+      customer:
+        $ref: '#/definitions/CustomerID'
+        
+  Transaction:
+    required:
+      - from
+      - to
+      - amount
+      - executedAt
+    properties:
+      amount:
+        type: number
+      from:
+        $ref: '#/definitions/AccountID'
+      to:
+        $ref: '#/definitions/AccountID'
+      executedAt:
+        type: string
+        format: date-time
+        
+  TransactionArray:
+    required:
+      - transactions
+    properties:
+      transactions:
+        type: array
+        items:
+          $ref: "#/definitions/Transaction"
+        
+  CreateTransferRequest:
+    required:
+      - from
+      - to
+      - amount
+    properties:
+      amount:
+        type: number
+      from:
+        $ref: '#/definitions/AccountID'
+      to:
+        $ref: '#/definitions/AccountID'
+
+  ResponseError:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+      error:
+        type: string
+      code:
+        type: integer
+        format: int32
+        
+  Stats:
+    description: >
+      Useful for debugging - pinging your servers and seeing how long is it, that they've been up.
+    required:
+      - startup
+      - uptime
+      - state
+    properties:
+      state:
+        type: string
+      startup:
+        type: string
+        format: date-time
+      uptime:
+        type: integer
+        format: int32
+
+
+# AUTHENTICATION
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
