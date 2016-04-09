@@ -1,7 +1,7 @@
 'use strict';
 
 var logger = require("../libs/logger");
-var handler = require("./errors");
+var ErrorHandler = require("./errors");
 
 var CustomerManager = require('../models/customer_memory');
 var AccountsManager = require('../models/account_memory');
@@ -16,7 +16,7 @@ module.exports.createCustomer = function createCustomer (req, res, next) {
     }).then(function(customer){
         res.send(customer.toObject());
     }).catch(function(err){
-        handler.send(err);
+        ErrorHandler.sendError(res, err);
     });
 };
 
@@ -26,10 +26,9 @@ module.exports.getCustomer = function getCustomer (req, res, next) {
     
     CustomerManager.findById(id)
     .then(function(customer){
-        if (!customer){
-            handler.notFound(res);
-        } else {
-            AccountsManager.findByOwnerId(customer.id)
+        if (customer){
+            return AccountsManager
+            .findByOwnerId(customer.id)
             .then(function(accounts){
                 var output = customer.toObject();
                 output.accounts = accounts.map(function(elem){
@@ -38,7 +37,8 @@ module.exports.getCustomer = function getCustomer (req, res, next) {
                 res.send(output);
             })
         }
+        ErrorHandler.throwNotFound("Customer not found");
     }).catch(function(err){
-        handler.send(err);
+        ErrorHandler.sendError(res, err);
     });
 };

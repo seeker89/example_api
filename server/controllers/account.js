@@ -1,12 +1,10 @@
 'use strict';
 
 var logger = require("../libs/logger");
-var handler = require("./errors");
+var ErrorHandler = require("./errors");
 
 var AccountManager = require('../models/account_memory');
-
-
-var Account = require('./AccountService');
+var CustomerManager = require('../models/customer_memory');
 
 /*
 
@@ -21,13 +19,21 @@ module.exports.createAccount = function createAccount (req, res, next) {
 
     var params = req.swagger.params.body.value;
 
-    AccountManager.create({
-        name: params.name,
-        ownerId: params.customer.id
+    CustomerManager
+    .findById(params.customer.id)
+    .then(function(customer){
+        if (customer){
+            return AccountManager.create({
+                name: params.name,
+                ownerId: params.customer.id
+            });
+        }
+        ErrorHandler.throwNotFound("Customer not found");
     }).then(function(account){
+        console.log(account)
         res.send(account.toObject());
     }).catch(function(err){
-        handler.send(err);
+        ErrorHandler.sendError(res, err);
     });
 };
 
@@ -35,15 +41,15 @@ module.exports.getAccount = function getAccount (req, res, next) {
     
     var id = req.swagger.params.accountId.value;
     
-    AccountManager.findByNumber(id)
+    AccountManager
+    .findByNumber(id)
     .then(function(account){
-        if (!account){
-            handler.notFound(res);
-        } else {
-            res.send(account.toObject());
+        if (account){
+            return res.send(account.toObject());
         }
+        ErrorHandler.throwNotFound("Account not found");
     }).catch(function(err){
-        handler.send(err);
+        ErrorHandler.sendError(res, err);
     });
 };
 

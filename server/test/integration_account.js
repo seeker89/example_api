@@ -38,6 +38,28 @@ describe('Integration', function() {
 
             });
 
+            it('should not create an account for a non-existent user', function(done) {
+
+                var req = {
+                    amount: 1001.00,
+                    name: "current",
+                    customer: {
+                        id: "i don't exist"
+                    }
+                };
+
+                init.then(function(app){
+
+                    request(app)
+                        .put('/account')
+                        .set('Accept', 'application/json')
+                        .send(req)
+                        .expect(404)
+                        .end(done)
+                });
+
+            });
+
             it('should not create an account without name', function(done) {
 
                 var req = {

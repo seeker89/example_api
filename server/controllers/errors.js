@@ -2,17 +2,20 @@
 
 var logger = require("../libs/logger");
 
-module.exports.send = function(res, err) {
-    logger.error(err);
-    res.status(500);
+module.exports.sendError = function(res, err) {
+    if (!err.code || err.code == 500){
+        logger.error(err);
+    } else {
+        logger.warn(err)
+    }
+    res.status(err.code || 500);
     res.send({
-        message: err
+        message: err.message || err.toString()
     })
 };
 
-module.exports.notFound = function(res) {
-    res.status(404);
-    res.send({
-        message: "Entity not found"
-    })
+module.exports.throwNotFound = function(msg) {
+    var err = new Error(msg);
+    err.code = 404;
+    throw err;
 };
