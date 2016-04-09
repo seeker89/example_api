@@ -11,7 +11,7 @@ var logger = require("./libs/logger");
 // default environment
 process.env.ENV = process.env.ENV || "dev";
 
-var swaggerFile = __dirname + "/../API.yml";
+var swaggerFile = __dirname + "/API.yml";
 var swaggerUIURL = "/ui";
 
 var app = express();

@@ -32,5 +32,8 @@
     "should": "^5.2.0",
     "sinon": "^1.16.1",
     "supertest": "^1.2.0"
+  },
+  "engines": {
+    "node": "v4.4.2"
   }
 }
