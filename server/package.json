@@ -26,10 +26,11 @@
     "winston": "^2.2.0"
   },
   "devDependencies": {
-    "should": "^5.2.0",
-    "supertest": "^0.15.0",
+    "blanket": "^1.2.3",
     "chai": "^3.2.0",
     "mocha": "^2.3.0",
-    "sinon": "^1.16.1"
+    "should": "^5.2.0",
+    "sinon": "^1.16.1",
+    "supertest": "^1.2.0"
   }
 }

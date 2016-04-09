@@ -11,11 +11,11 @@ describe('Customer in-memory', function() {
 
         it('should find one of the predefined customers', function(done) {
 
-            CustomerMemory.findById(3)
+            CustomerMemory.findById("3")
                 
                 .then(function(customer){
                     expect(customer.name).to.be.equal("Heidi Hasselbach");
-                    expect(customer.id).to.be.equal(3);
+                    expect(customer.id).to.be.equal("3");
                     done();
                 })
                 .catch(function(err){
@@ -26,7 +26,7 @@ describe('Customer in-memory', function() {
 
         it('should return undefined for non-existing customer', function(done) {
 
-            CustomerMemory.findById(300)
+            CustomerMemory.findById("300")
                 
                 .then(function(customer){
                     expect(customer).to.be.equal(undefined);

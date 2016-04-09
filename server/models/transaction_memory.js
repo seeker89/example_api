@@ -3,6 +3,7 @@ var Moment = require("moment");
 var _ = require("lodash");
 
 var Transaction = require("../models/transaction");
+var wrap = require("../libs/mem_wrapper");
 
 var __store = [];
 
@@ -30,7 +31,7 @@ module.exports = {
                 executedAt: (new Date()).toISOString()
             }
             __store.push(entry);
-            return Promise.resolve(new Transaction(entry));
+            return Promise.resolve(new Transaction(wrap(entry)));
         }
 
         return Promise.reject(new Error("Name field is required for creation of a Transaction"));
@@ -41,26 +42,26 @@ module.exports = {
             return elem.origin === id || elem.destination === id
         });
         return Promise.resolve(found.map(function(elem){
-            return new Transaction(elem);
+            return new Transaction(wrap(elem));
         }));
     },
 
     findByOrigin: function(id){
         var found = _.filter(__store, {"origin": id});
         return Promise.resolve(found.map(function(elem){
-            return new Transaction(elem);
+            return new Transaction(wrap(elem));
         }));
     },
 
     findByDestination: function(id){
         var found = _.filter(__store, {"destination": id});
         return Promise.resolve(found.map(function(elem){
-            return new Transaction(elem);
+            return new Transaction(wrap(elem));
         }));
     },
 
     validateEntry: function(entry){
-        return entry && entry.origin && entry.destination && entry.amount;
+        return entry && entry.origin && entry.destination && (entry.amount || entry.amount === 0);
     },
 
 
@@ -95,5 +96,23 @@ __store = [
         "destination": "000004",
         "executedAt": (new Date()).toISOString(),
         "amount": 1.00,
+    },
+    {
+        "origin": "1",
+        "destination": "2",
+        "executedAt": (new Date()).toISOString(),
+        "amount": 1.00,
+    },
+    {
+        "origin": "2",
+        "destination": "1",
+        "executedAt": (new Date()).toISOString(),
+        "amount": 1222.00,
+    },
+    {
+        "origin": "3",
+        "destination": "2",
+        "executedAt": (new Date()).toISOString(),
+        "amount": 77.00,
     },
 ];

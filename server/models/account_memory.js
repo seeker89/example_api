@@ -2,10 +2,12 @@ var Promise = require("bluebird");
 var Moment = require("moment");
 var _ = require("lodash");
 
+var logger = require("../libs/logger");
 var Account = require("../models/account");
+var wrap = require("../libs/mem_wrapper");
 
 var __store = [];
-var counter = 0;
+var counter = 1;
 var prefix = "0000000000000";
 
 /*
@@ -33,17 +35,17 @@ module.exports = {
             }
             __store.push(entry);
             counter++;
-            return Promise.resolve(new Account(entry));
+            return Promise.resolve(new Account(wrap(entry)));
         }
 
-        return Promise.reject(new Error("Name field is required for creation of a Account"));
+        return Promise.reject(new Error("Name and ownerId fields are required for creation of a Account"));
 
     },
 
     findByOwnerId: function(id){
         var found = _.filter(__store, {"ownerId": id});
         return Promise.resolve(found.map(function(elem){
-            return new Account(elem);
+            return new Account(wrap(elem));
         }));
     },
 
@@ -51,7 +53,7 @@ module.exports = {
         var result;
         var found = _.find(__store, {"number": id});
         if (found){
-            result = new Account(found);
+            result = new Account(wrap(found));
         }
         return Promise.resolve(result);
     },
@@ -77,20 +79,35 @@ module.exports = {
 __store = [
     {
         "number": "1",
-        "ownerId": 2,
+        "ownerId": "2",
         "name": "Current Account",
         "amount": 10.20,
     },
     {
         "number": "2",
-        "ownerId": 2,
+        "ownerId": "2",
         "name": "Savings Account",
         "amount": 10000.78,
     },
     {
         "number": "3",
-        "ownerId": 3,
+        "ownerId": "3",
         "name": "Current Account",
         "amount": -20.99,
+    },
+
+    {
+        "number": "transfer_from",
+        "ownerId": "3",
+        "name": "transfer_from - name",
+        "amount": 1000,
+    },
+
+
+    {
+        "number": "transfer_to",
+        "ownerId": "3",
+        "name": "transfer_to - name",
+        "amount": -10.50,
     },
 ];

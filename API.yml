@@ -260,13 +260,12 @@ definitions:
     properties:
       name:
         type: string
-      id:
-        type: string
         
   Account:
     required:
       - number
       - amount
+      - name
     properties:
       number:
         type: string
@@ -291,11 +290,14 @@ definitions:
     required:
       - amount
       - customer
+      - name
     properties:
       amount:
         type: number
       customer:
         $ref: '#/definitions/CustomerID'
+      name:
+        type: string
         
   Transaction:
     required:
@@ -325,15 +327,15 @@ definitions:
         
   CreateTransferRequest:
     required:
-      - from
-      - to
+      - origin
+      - destination
       - amount
     properties:
       amount:
         type: number
-      from:
+      origin:
         $ref: '#/definitions/AccountID'
-      to:
+      destination:
         $ref: '#/definitions/AccountID'
 
   ResponseError:

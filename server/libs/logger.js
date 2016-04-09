@@ -7,6 +7,7 @@ var consoleLogger = new winston.transports.Console({
     },
     colorize: true,
     prettyPrint: true,
+    inlineMeta: true
 });
 
 var logger = new winston.Logger({
