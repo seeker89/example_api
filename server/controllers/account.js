@@ -1,7 +1,7 @@
 'use strict';
 
 var logger = require("../libs/logger");
-var sendError = require("./errors");
+var handler = require("./errors");
 
 var AccountManager = require('../models/account_memory');
 
@@ -27,12 +27,24 @@ module.exports.createAccount = function createAccount (req, res, next) {
     }).then(function(account){
         res.send(account.toObject());
     }).catch(function(err){
-        sendError(err);
+        handler.send(err);
     });
 };
 
 module.exports.getAccount = function getAccount (req, res, next) {
-  Account.getAccount(req.swagger.params, res, next);
+    
+    var id = req.swagger.params.accountId.value;
+    
+    AccountManager.findByNumber(id)
+    .then(function(account){
+        if (!account){
+            handler.notFound(res);
+        } else {
+            res.send(account.toObject());
+        }
+    }).catch(function(err){
+        handler.send(err);
+    });
 };
 
 module.exports.createTransfer = function createTransfer (req, res, next) {

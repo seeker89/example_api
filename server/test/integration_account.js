@@ -9,7 +9,7 @@ describe('Integration', function() {
 
     describe('#account', function() {
 
-        describe('/account', function() {
+        describe('PUT /account', function() {
 
             it('should create an account for a valid user', function(done) {
 
@@ -57,6 +57,57 @@ describe('Integration', function() {
                         .expect(function(res) {
                             expect(res.body).to.have.property("message");
                         })
+                        .end(done)
+                });
+
+            });
+
+        });
+
+
+
+
+
+        describe('GET /account', function() {
+
+            it('should get an account for a valid account', function(done) {
+
+                var id = "2";
+
+                init.then(function(app){
+
+                    request(app)
+                        .get('/account/' + id)
+                        .set('Accept', 'application/json')
+                        .expect(200)
+                        .expect(function(res) {
+                            ["name", "ownerId", "number", "amount"].forEach(function(prop){
+                                expect(res.body).to.have.property(prop);
+                            });
+
+                            expect(res.body).to.deep.equal({
+                                "number": "2",
+                                "ownerId": "2",
+                                "name": "Savings Account",
+                                "amount": 10000.78,
+                            });
+                        })
+                        .end(done)
+                });
+
+            });
+
+
+            it('should return 404 for non existin account', function(done) {
+
+                var id = "doesn't exist";
+
+                init.then(function(app){
+
+                    request(app)
+                        .get('/account/' + id)
+                        .set('Accept', 'application/json')
+                        .expect(404)
                         .end(done)
                 });
 
