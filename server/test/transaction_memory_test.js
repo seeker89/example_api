@@ -62,6 +62,12 @@ describe('Transaction in-memory', function() {
             var amount1 = 1000.20;
             var amount2 = 2000.20;
 
+            var origin1 = "000001";
+            var destination1 = "000002";
+
+            var origin2 = "000002";
+            var destination2 = "000001";
+
             TransactionMemory.findByAccount(account)
                 
                 .then(function(transactions){
@@ -70,11 +76,13 @@ describe('Transaction in-memory', function() {
 
                     var transaction = transactions[0];
                     expect(transaction.amount).to.be.equal(amount1);
-                    expect(transaction.origin).to.be.equal(origin);
+                    expect(transaction.origin).to.be.equal(origin1);
+                    expect(transaction.destination).to.be.equal(destination1);
 
                     transaction = transactions[1];
                     expect(transaction.amount).to.be.equal(amount2);
-                    expect(transaction.origin).to.be.equal(origin);
+                    expect(transaction.origin).to.be.equal(origin2);
+                    expect(transaction.destination).to.be.equal(destination2);
 
 
                     done();
@@ -93,6 +101,12 @@ describe('Transaction in-memory', function() {
             var amount1 = 1000.20;
             var amount2 = 2000.20;
 
+            var origin1 = "000001";
+            var destination1 = "000002";
+
+            var origin2 = "000002";
+            var destination2 = "000001";
+
             TransactionMemory.findByAccount(account)
                 
                 .then(function(transactions){
@@ -101,11 +115,13 @@ describe('Transaction in-memory', function() {
 
                     var transaction = transactions[0];
                     expect(transaction.amount).to.be.equal(amount1);
-                    expect(transaction.origin).to.be.equal(origin);
+                    expect(transaction.origin).to.be.equal(origin1);
+                    expect(transaction.destination).to.be.equal(destination1);
 
                     transaction = transactions[1];
                     expect(transaction.amount).to.be.equal(amount2);
-                    expect(transaction.origin).to.be.equal(origin);
+                    expect(transaction.origin).to.be.equal(origin2);
+                    expect(transaction.destination).to.be.equal(destination2);
 
 
                     done();
