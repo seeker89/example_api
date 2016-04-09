@@ -49,3 +49,9 @@ I'll leave out the employees authentication for now to kick start.
 ## `Step three` - bootstrap node-based api, serve docs and such
 
 PR: [https://github.com/seeker89/example_api/pull/3](https://github.com/seeker89/example_api/pull/3)
+
+
+
+## `Step four` - TDD Customer model + in-memory backend
+
+PR: [https://github.com/seeker89/example_api/pull/4](https://github.com/seeker89/example_api/pull/4)
