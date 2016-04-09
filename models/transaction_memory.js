@@ -34,7 +34,7 @@ module.exports = {
             return Promise.resolve(new Transaction(wrap(entry)));
         }
 
-        return Promise.reject(new Error("Name field is required for creation of a Transaction"));
+        return Promise.reject(new Error("Origin, destination and amount required to create a Transaction"));
     },
 
     findByAccount: function(id){

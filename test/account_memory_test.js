@@ -141,6 +141,41 @@ describe('Account in-memory', function() {
 
         });
 
+        it('should not create without name', function(done) {
+
+            var Name = "Another one";
+            var ownerId = 2;
+            var number;
+
+            AccountMemory.create({
+                "ownerId": ownerId
+            }).then(function(account){
+                done("Didn't reject");
+            })
+            .catch(function(err){
+                expect(err).to.be.instanceof(Error);
+                done();
+            });
+
+        });
+
+        it('should not create without name', function(done) {
+
+            var Name = "Another one";
+            var ownerId = 2;
+
+            AccountMemory.create({
+                "name": Name
+            }).then(function(account){
+                done("Didn't reject");
+            })
+            .catch(function(err){
+                expect(err).to.be.instanceof(Error);
+                done();
+            });
+
+        });
+
     });
 
 });

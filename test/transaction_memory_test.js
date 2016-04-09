@@ -200,6 +200,65 @@ describe('Transaction in-memory', function() {
 
         });
 
+        it('should not create without origin', function(done) {
+
+            var origin = "000001";
+            var destination = "000002";
+            var amount = 1230.89;
+
+            TransactionMemory.create({
+                "destination": destination,
+                "amount": amount
+            }).then(function(transaction){
+                done("Didn't reject");
+            })
+            .catch(function(err){
+                expect(err).to.be.instanceof(Error);
+                done();
+            });
+
+        });
+
+
+        it('should not create without destination', function(done) {
+
+            var origin = "000001";
+            var destination = "000002";
+            var amount = 1230.89;
+
+            TransactionMemory.create({
+                "origin": origin,
+                "amount": amount
+            }).then(function(transaction){
+                done("Didn't reject");
+            })
+            .catch(function(err){
+                expect(err).to.be.instanceof(Error);
+                done();
+            });
+
+        });
+
+
+        it('should not create without amount', function(done) {
+
+            var origin = "000001";
+            var destination = "000002";
+            var amount = 1230.89;
+
+            TransactionMemory.create({
+                "origin": origin,
+                "destination": destination
+            }).then(function(transaction){
+                done("Didn't reject");
+            })
+            .catch(function(err){
+                expect(err).to.be.instanceof(Error);
+                done();
+            });
+
+        });
+
     });
 
 });

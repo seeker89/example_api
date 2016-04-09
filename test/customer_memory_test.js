@@ -83,6 +83,19 @@ describe('Customer in-memory', function() {
 
         });
 
+        it('should not create without name', function(done) {
+
+            CustomerMemory.create({
+            }).then(function(customer){
+                done("Didn't reject");
+            })
+            .catch(function(err){
+                expect(err).to.be.instanceof(Error);
+                done();
+            });
+
+        });
+
     });
 
 });

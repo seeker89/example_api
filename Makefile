@@ -4,4 +4,7 @@ run:
 test:
 	mocha
 
-.PHONY: run test clean
+coverage:
+	istanbul cover _mocha -- -R spec
+
+.PHONY: run test clean coverage
