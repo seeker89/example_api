@@ -50,6 +50,10 @@ I'll leave out the employees authentication for now to kick start.
 
 PR: [https://github.com/seeker89/example_api/pull/3](https://github.com/seeker89/example_api/pull/3)
 
+So now you can run `make run` to read the documentation and have a play with the API. Time for a burrito.
+
+
+![docs/ui.gif](docs/ui.gif)
 
 
 ## `Step #4` - TDD Customer model + in-memory backend
