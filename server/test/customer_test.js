@@ -7,6 +7,18 @@ var Customer = require("../models/customer");
 
 describe('Customer', function() {
 
+    describe('#constructor', function() {
+
+        it('should not accept no storage', function() {
+
+            expect(function(){
+                new Customer(undefined);
+            }).to.throw(RangeError);
+
+        });
+
+    });
+
     describe('#get & set', function() {
 
         it('should get and set things', function() {
