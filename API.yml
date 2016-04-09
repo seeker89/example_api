@@ -327,15 +327,15 @@ definitions:
         
   CreateTransferRequest:
     required:
-      - from
-      - to
+      - origin
+      - destination
       - amount
     properties:
       amount:
         type: number
-      from:
+      origin:
         $ref: '#/definitions/AccountID'
-      to:
+      destination:
         $ref: '#/definitions/AccountID'
 
   ResponseError:
