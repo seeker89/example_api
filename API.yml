@@ -111,8 +111,8 @@ paths:
     put:
       summary: "Make a new transfer"
       description: >
-        Creates a new account for the customer in question.
-        Creates a transaction with the amount specified.
+        Makes a new transfer. It should do some kind of complex validation about
+        whether the originating account has enough money on it, can do overdraft, credit, etc.
       operationId: createTransfer
       parameters:
         - in: body
