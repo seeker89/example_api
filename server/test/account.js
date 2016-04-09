@@ -2,17 +2,17 @@ var assert = require('chai').assert;
 var expect = require('chai').expect;
 var Promise = require("bluebird");
 
-var Customer = require("../models/customer");
+var Account = require("../models/Account");
 
 
-describe('Customer', function() {
+describe('Account', function() {
 
     describe('#constructor', function() {
 
         it('should not accept no storage', function() {
 
             expect(function(){
-                new Customer(undefined);
+                new Account(undefined);
             }).to.throw(RangeError);
 
         });
@@ -25,18 +25,18 @@ describe('Customer', function() {
 
             var storage = {};
 
-            var usr = new Customer(storage);
-            usr.set("name", "Donald");
+            var usr = new Account(storage);
+            usr.set("name", "Current Account");
 
             expect(storage).to.have.property("name");
 
-            expect(usr.get("name")).to.be.equal("Donald");
-            expect(storage.name).to.be.equal("Donald");
+            expect(usr.get("name")).to.be.equal("Current Account");
+            expect(storage.name).to.be.equal("Current Account");
 
-            usr.set("name", "Duck");
+            usr.set("name", "Savings Account");
 
-            expect(usr.get("name")).to.be.equal("Duck");
-            expect(storage.name).to.be.equal("Duck");
+            expect(usr.get("name")).to.be.equal("Savings Account");
+            expect(storage.name).to.be.equal("Savings Account");
 
         });
 
@@ -54,7 +54,7 @@ describe('Customer', function() {
                 return Promise.resolve(usr);
             };
 
-            usr = new Customer(storage);
+            usr = new Account(storage);
 
             usr.save()
                 .then(function(u){
@@ -74,18 +74,24 @@ describe('Customer', function() {
         it('should work like a charm', function() {
 
             var values = {
-                name: "Donald",
-                id: "12346"
+                name: "Current Account",
+                number: "curr-12346",
+                ownerId: "1",
+                amount: 777.22
             }
 
             var storage = {};
 
-            var usr = new Customer(storage);
+            var usr = new Account(storage);
             usr.set("name", values.name);
-            usr.set("id", values.id);
+            usr.set("number", values.number);
+            usr.set("ownerId", values.ownerId);
+            usr.set("amount", values.amount);
 
             expect(usr.name).to.be.equal(values.name);
-            expect(usr.id).to.be.equal(values.id);
+            expect(usr.number).to.be.equal(values.number);
+            expect(usr.ownerId).to.be.equal(values.ownerId);
+            expect(usr.amount).to.be.equal(values.amount);
 
             expect(usr.doesntexitst).to.be.equal(undefined);
         });
@@ -96,7 +102,7 @@ describe('Customer', function() {
 
         it('should work like a charm', function() {
             var storage = {};
-            var usr = new Customer(storage);
+            var usr = new Account(storage);
             expect(usr.toObject()).to.be.deep.eql(storage);
         });
 
