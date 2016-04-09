@@ -61,3 +61,10 @@ PR: [https://github.com/seeker89/example_api/pull/4](https://github.com/seeker89
 
 PR: [https://github.com/seeker89/example_api/pull/5](https://github.com/seeker89/example_api/pull/5)
 
+
+## `Step six` - TDD Transaction model + in-memory backend
+
+PR: [https://github.com/seeker89/example_api/pull/6](https://github.com/seeker89/example_api/pull/6)
+
+
+Cool, so now that we have all the bricks tested, let's write some integration tests and wire all of it together.
