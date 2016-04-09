@@ -55,3 +55,9 @@ PR: [https://github.com/seeker89/example_api/pull/3](https://github.com/seeker89
 ## `Step four` - TDD Customer model + in-memory backend
 
 PR: [https://github.com/seeker89/example_api/pull/4](https://github.com/seeker89/example_api/pull/4)
+
+
+## `Step five` - TDD Account model + in-memory backend
+
+PR: [https://github.com/seeker89/example_api/pull/5](https://github.com/seeker89/example_api/pull/5)
+
