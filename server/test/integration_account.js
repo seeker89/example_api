@@ -160,7 +160,7 @@ describe('Integration', function() {
             });
 
 
-            it('should return 404 for non existin account', function(done) {
+            it('should return 404 for non existing account', function(done) {
 
                 var id = "doesn't exist";
 
