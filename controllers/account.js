@@ -8,6 +8,14 @@ var CustomerManager = require('../models/customer_memory');
 var TransactionsManager = require('../models/transaction_memory');
 
 
+/*
+
+    Create account for the a customer.
+
+    https://example-api-bank.herokuapp.com/ui/#!/account/createAccount
+    
+ */
+
 module.exports.createAccount = function createAccount(req, res, next) {
 
     var params = req.swagger.params.body.value;
@@ -40,6 +48,16 @@ module.exports.createAccount = function createAccount(req, res, next) {
     });
 };
 
+
+
+/*
+
+    Get account by its number.
+
+    https://example-api-bank.herokuapp.com/ui/#!/account/getAccount
+    
+ */
+
 module.exports.getAccount = function getAccount(req, res, next) {
     
     var id = req.swagger.params.accountId.value;
@@ -56,7 +74,12 @@ module.exports.getAccount = function getAccount(req, res, next) {
     });
 };
 
+
 /*
+
+    Create a transfer between two accounts.
+
+    https://example-api-bank.herokuapp.com/ui/#!/account/createTransfer
 
     In the real world we would like to wrap this into a transaction.
 
@@ -88,7 +111,6 @@ module.exports.createTransfer = function createTransfer(req, res, next) {
         }
         ErrorHandler.throwNotFound("Destination account not found");
     }).then(function(trans){
-        console.log(trans);
         transaction = trans;
         accountOrigin.amount -= params.amount;
         return accountOrigin.save();
@@ -103,6 +125,15 @@ module.exports.createTransfer = function createTransfer(req, res, next) {
 
 
 };
+
+
+/*
+
+    Create a transfer between two accounts.
+
+    https://example-api-bank.herokuapp.com/ui/#!/account/getAccountHistory
+
+ */
 
 module.exports.getAccountHistory = function getAccountHistory(req, res, next) {
 

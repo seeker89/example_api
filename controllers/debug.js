@@ -2,6 +2,14 @@
 
 var logger = require("../libs/logger");
 
+/*
+
+    Send some stats as a debug endpoint
+
+    https://example-api-bank.herokuapp.com/ui/#!/debug/stats
+
+ */
+
 module.exports.stats = function stats (req, res) {
     var resp = {
         startup: req.app.locals.startup,

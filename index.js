@@ -94,6 +94,8 @@ if (require.main === module){
         logger.info("UI at http://localhost:" + port + swaggerUIURL);
         app.listen(port);
     });
+} else {
+    require("winston").level = "warn";
 }
 
 module.exports = init; // so that we can run tests
