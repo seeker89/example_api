@@ -5,7 +5,7 @@ var Promise = require("bluebird");
 var CustomerMemory = require("../models/customer_memory");
 
 
-describe('Customer', function() {
+describe('Customer in-memory', function() {
 
     describe('#find', function() {
 
