@@ -34,7 +34,7 @@ module.exports = {
             }
             __store.push(entry);
             counter++;
-            logger.debug("New account has been created", entry);
+            // logger.debug("New account has been created", entry);
             return Promise.resolve(new Account(entry));
         }
 
