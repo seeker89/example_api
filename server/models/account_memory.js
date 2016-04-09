@@ -2,6 +2,7 @@ var Promise = require("bluebird");
 var Moment = require("moment");
 var _ = require("lodash");
 
+var logger = require("../libs/logger");
 var Account = require("../models/account");
 
 var __store = [];
@@ -33,10 +34,11 @@ module.exports = {
             }
             __store.push(entry);
             counter++;
+            logger.debug("New account has been created", entry);
             return Promise.resolve(new Account(entry));
         }
 
-        return Promise.reject(new Error("Name field is required for creation of a Account"));
+        return Promise.reject(new Error("Name and ownerId fields are required for creation of a Account"));
 
     },
 
