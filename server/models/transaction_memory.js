@@ -96,4 +96,22 @@ __store = [
         "executedAt": (new Date()).toISOString(),
         "amount": 1.00,
     },
+    {
+        "origin": "1",
+        "destination": "2",
+        "executedAt": (new Date()).toISOString(),
+        "amount": 1.00,
+    },
+    {
+        "origin": "2",
+        "destination": "1",
+        "executedAt": (new Date()).toISOString(),
+        "amount": 1222.00,
+    },
+    {
+        "origin": "3",
+        "destination": "2",
+        "executedAt": (new Date()).toISOString(),
+        "amount": 77.00,
+    },
 ];

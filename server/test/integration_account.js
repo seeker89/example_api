@@ -137,6 +137,46 @@ describe('Integration', function() {
 
         });
 
+
+        describe('GET /account/history', function() {
+
+            it('should get transactions for a valid account', function(done) {
+
+                var id = "2";
+
+                init.then(function(app){
+
+                    request(app)
+                        .get('/account/history/' + id)
+                        .set('Accept', 'application/json')
+                        .expect(200)
+                        .expect(function(res) {
+                            expect(res.body).to.be.instanceof(Array);
+                            expect(res.body.length).to.be.equal(3);
+                        })
+                        .end(done)
+                });
+
+            });
+
+
+            it('should return 404 for non existin account', function(done) {
+
+                var id = "doesn't exist";
+
+                init.then(function(app){
+
+                    request(app)
+                        .get('/account/history/' + id)
+                        .set('Accept', 'application/json')
+                        .expect(404)
+                        .end(done)
+                });
+
+            });
+
+        });
+
     });
 
 });

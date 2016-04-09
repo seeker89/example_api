@@ -58,5 +58,24 @@ module.exports.createTransfer = function createTransfer(req, res, next) {
 };
 
 module.exports.getAccountHistory = function getAccountHistory(req, res, next) {
-  Account.getAccountHistory(req.swagger.params, res, next);
+
+    var id = req.swagger.params.accountId.value;
+    
+    AccountManager
+    .findByNumber(id)
+    .then(function(account){
+        if (account){
+            return TransactionsManager
+            .findByAccount(account.number)
+            .then(function(transactions){
+                var output = transactions.map(function(elem){
+                    return elem.toObject();
+                })
+                res.send(output);
+            })
+        }
+        ErrorHandler.throwNotFound("Account not found");
+    }).catch(function(err){
+        ErrorHandler.sendError(res, err);
+    });
 };
