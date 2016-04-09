@@ -11,12 +11,12 @@ describe('Account in-memory', function() {
 
         it('should find one of the predefined accounts', function(done) {
 
-            AccountMemory.findById("1")
+            AccountMemory.findByNumber("1")
                 
                 .then(function(account){
                     expect(account.name).to.be.equal("Current Account");
-                    expect(account.id).to.be.equal("1");
-                    expect(account.ownerid).to.be.equal(2);
+                    expect(account.number).to.be.equal("1");
+                    expect(account.ownerId).to.be.equal(2);
                     expect(account.amount).to.be.equal(10.20);
                     done();
                 })
@@ -28,7 +28,7 @@ describe('Account in-memory', function() {
 
         it('should return undefined for non-existing account', function(done) {
 
-            AccountMemory.findById("300")
+            AccountMemory.findByNumber("300")
                 
                 .then(function(account){
                     expect(account).to.be.equal(undefined);
@@ -77,7 +77,7 @@ describe('Account in-memory', function() {
                 "ownerId": ownerId
             }).then(function(account){
                 number = account.number;
-                return AccountMemory.findById(number)
+                return AccountMemory.findByNumber(number)
             }).then(function(account){
                 expect(account.name).to.be.equal(Name);
                 expect(account.number).to.not.be.equal(undefined);

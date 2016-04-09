@@ -44,8 +44,13 @@ module.exports = {
 
     },
 
-    findById: function(id){
-
+    findByNumber: function(id){
+        var result;
+        var found = _.find(__store, {"number": id});
+        if (found){
+            result = new Account(found);
+        }
+        return Promise.resolve(result);
     },
 
     validateEntry: function(entry){
