@@ -11,7 +11,7 @@ var logger = require("./libs/logger");
 // default environment
 process.env.ENV = process.env.ENV || "dev";
 
-var swaggerFile = "../API.yml";
+var swaggerFile = __dirname + "/../API.yml";
 var swaggerUIURL = "/ui";
 
 var app = express();
@@ -51,7 +51,7 @@ var init = new Promise(function(fulfill, reject){
 
         // Route validated requests to appropriate controller
         app.use(middleware.swaggerRouter({
-            controllers: './controllers'
+            controllers: __dirname + "/controllers"
         }));
 
         // Serve the Swagger documents and Swagger UI
