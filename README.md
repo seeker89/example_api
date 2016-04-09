@@ -72,3 +72,8 @@ PR: [https://github.com/seeker89/example_api/pull/6](https://github.com/seeker89
 
 
 Cool, so now that we have all the bricks tested, let's write some integration tests and wire all of it together.
+
+
+## `Step #7` - TDD wire up all controllers using `supertest` to make real calls to a real instance of the app
+
+PR: [https://github.com/seeker89/example_api/pull/7](https://github.com/seeker89/example_api/pull/7)
