@@ -43,6 +43,56 @@ describe('Account in-memory', function() {
     });
 
 
+    describe('#find', function() {
+
+        it('should find all accounts of the user', function(done) {
+
+            AccountMemory.findByOwnerId(2)
+                
+                .then(function(accounts){
+                    expect(accounts.map(function(elem){
+                        return elem.toObject();
+                    })).to.be.deep.equal(
+                    [
+                        {
+                            "number": "1",
+                            "ownerId": 2,
+                            "name": "Current Account",
+                            "amount": 10.20,
+                        },
+                        {
+                            "number": "2",
+                            "ownerId": 2,
+                            "name": "Savings Account",
+                            "amount": 10000.78,
+                        }
+                    ]
+                    );
+                    done();
+                })
+                .catch(function(err){
+                    done(err);
+                });
+
+        });
+
+        it('should return an empty array for when no accounts found', function(done) {
+
+            AccountMemory.findByOwnerId("300")
+                
+                .then(function(accounts){
+                    expect(accounts).to.be.equal([]);
+                    done();
+                })
+                .catch(function(err){
+                    done(err);
+                });
+
+        });
+
+    });
+
+
     describe('#create', function() {
 
         it('should create and return a new account with a number', function(done) {
