@@ -1,7 +1,7 @@
 var winston = require('winston');
 
 var consoleLogger = new winston.transports.Console({
-    level: 'debug',
+    level: process.env.LOG || 'debug',
     timestamp: function() {
         return new Date().toString();
     },

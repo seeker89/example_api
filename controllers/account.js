@@ -88,7 +88,6 @@ module.exports.createTransfer = function createTransfer(req, res, next) {
         }
         ErrorHandler.throwNotFound("Destination account not found");
     }).then(function(trans){
-        console.log(trans);
         transaction = trans;
         accountOrigin.amount -= params.amount;
         return accountOrigin.save();
